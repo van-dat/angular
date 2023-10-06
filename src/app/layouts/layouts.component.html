@@ -1,0 +1,20 @@
+<div class="flex flex-col ">
+    <div class="w-full">
+        <app-header (ishowEvent)="handleIshowEvent()"></app-header>
+    </div>
+    <div class="flex w-full">
+        <div [@children]="ishow ? 'show' : 'hidden'" class="w-30 py-5 show">
+            <div  class="overflow-y-auto h-[95%] shadow-lg  border-[1px]  rounded-l-xl">
+                <app-sidebar></app-sidebar>
+            </div>
+        </div>
+        <div class="flex w-full p-5 ">
+            <div class="layout-main w-full shadow-lg border-[1px] rounded-lg">
+                <router-outlet></router-outlet>
+            </div>
+            <!-- <app-footer></app-footer> -->
+        </div>
+    </div>
+    
+
+</div>

@@ -1,0 +1,21 @@
+<div class="flex h-[70px]  w-ful items-center justify-between px-3 shadow-lg">
+    <div class="flex gap-4 ">
+        <a class="flex items-center  gap-2" routerLink="/">
+            <img src="../../../assets/image/logo.svg" class="object-contain w-[45px]" alt="">
+            <span class="font-semibold text-xl">SAKAI</span>
+        </a>
+        <div class=" flex justify-content-center  font-semibold text-lg ">
+            <button pButton icon="pi pi-bars" (click)="ishow()"
+                class="p-button-success py-2 px-[10px] focus:outline-none focus:ring focus:border-blue-500 focus:font-semibold rounded-md ">
+            </button>
+        </div>
+    </div>
+    <div class="flex items-center gap-3">
+        <button pButton icon="pi pi-calendar" class="p-button-success">
+        </button>
+        <button pButton icon="pi pi-user" class="p-button-success">
+        </button>
+        <button pButton icon="pi pi-cog" class="p-button-success">
+        </button>
+    </div>
+</div>
