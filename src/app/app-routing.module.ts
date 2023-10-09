@@ -16,9 +16,14 @@ const routes: Routes = [
       }, 
       {
         path: 'ct', loadChildren: () => import('./components/chamcong/chamcong.module').then(m => m.ChamcongModule)
-      }, {
-        path: 'analyst',
-        loadChildren: () => import('./components/analyst/analyst.module').then(m=>m.AnalystModule)
+      }
+      , {
+        path: 'pie',
+        loadChildren: () => import('./components/pie/pie.module').then(m=> m.PieModule)
+      },
+      {
+        path: 'line',
+        loadChildren: () => import('./components/line/line.module').then(m=> m.LineModule)
       }
       
     ]

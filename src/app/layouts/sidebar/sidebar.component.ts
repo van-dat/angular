@@ -51,12 +51,12 @@ export class SidebarComponent implements OnInit {
           {
             text: 'Biểu đồ Pie',
             icon: 'pi pi-chart-pie',
-            path: ['analyst/pie']
+            path: ['pie']
           },
           {
             text: 'Biểu đồ Line',
             icon: 'pi pi-home',
-            path:['analyst/line']
+            path:['line']
           },
         ]
       },
