@@ -34,22 +34,28 @@ export class PieComponent implements OnChanges {
     credits: {
       enabled: false,
     },
-    tooltip: {
-      pointFormat: '{series.name}<br/> <b>{point.percentage:.1f}%',
-      useHTML: true,
-    },
+    
+
     plotOptions: {
+
       pie: {
         allowPointSelect: true,
         cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage}%',
-        },
+        // dataLabels: {
+        //   enabled: true,
+        //   format: '<b>{point.name}</b>: {point.percentage}%',
+        // },
         showInLegend: true,
         innerSize: 50,
       },
-    },
+      series: {
+        label: {
+          connectorAllowed: true
+        },
+      },
+
+
+    }
   };
 
   handleUpdate(type: any): void {
@@ -62,10 +68,19 @@ export class PieComponent implements OnChanges {
     }
     this.Options_Pie.series = [
       {
+        name: this.chart_name,
         type: type.toString(),
         data: pieData,
       },
     ];
+    this.Options_Pie.tooltip =  {
+      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.data.name}: </td>' +
+        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+      footerFormat: '</table>',
+      shared: true,
+      useHTML: true
+    },
     this.updateFlag = true;
   }
 }

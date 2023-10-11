@@ -1,18 +1,23 @@
 <div class="flex flex-col bg-[#eff3f8] overflow-hidden h-screen   ">
-    <div class="w-full">
+    <div class="w-full fixed z-10 top-0">
         <app-header (ishowEvent)="handleIshowEvent()"></app-header>
     </div>
-    <div class="w-full mt-3 px-4 rounded-xl">
-        <app-menu-bar></app-menu-bar>
-    </div>
-    <div class="flex w-full p-4 h-screen">
-        <div [@children]="ishow ? 'show' : 'hidden'" [ngClass]="{'mr-4' : ishow}" class="w-30 h-[75%] overflow-y-auto shadow-lg rounded-l-lg  ">
-            <app-sidebar></app-sidebar>
+    <div class="w-full relative pt-[70px]">
+        <div  class="w-full mt-3 px-4 rounded-xl">
+            <app-menu-bar (sidebarVisibleShow) = "handleIsHidden()"></app-menu-bar>
         </div>
-        <div class="w-full overflow-y-auto h-screen rounded-lg border-1  ">
-            <router-outlet></router-outlet>
-            <!-- <app-footer></app-footer> -->
+        <div class="flex w-full p-4 h-screen">
+            <div [@children]="ishow ? 'show' : 'hidden'" [ngClass]="{'mr-4' : ishow}" class="w-30 h-[75%] overflow-y-auto shadow-lg rounded-l-lg  ">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="w-full overflow-y-auto h-screen rounded-lg border-1">
+                <router-outlet></router-outlet>
+                <!-- <app-footer></app-footer> -->
+            </div>
         </div>
+        <p-sidebar styleClass="absolute"  [(visible)]="sidebarVisible" position="right">
+           <app-filters></app-filters>
+        </p-sidebar>
     </div>
 
 

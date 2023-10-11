@@ -13,7 +13,7 @@ interface Chart {
 export class DashboardComponent {
   data: any
   dataChart: any
-  myChartName: string = 'pie-chart'
+  myChartName: string = 'chart'
 
   // 
   cities: Chart[] = [];
@@ -22,10 +22,10 @@ export class DashboardComponent {
   }
   ngOnInit(): void {
     this.cities = [
-      { chart: 'line', value: 'line' },
+      { chart: 'pie', value: 'pie' },
       { chart: 'spline', value: 'spline' },
       { chart: 'column', value: 'column' },
-      { chart: 'pie', value: 'pie' },
+      { chart: 'line', value: 'line' },
     ];
     this.dataSrv.getDataPie().subscribe((res) => {
       this.data = res?.data?.filter((i: any) => i.activity === 17 || i.activity === 63 || i.activity === 20);

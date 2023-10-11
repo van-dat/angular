@@ -23,12 +23,18 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class LayoutsComponent implements OnDestroy {
   ishow:boolean = true
- constructor() {
- 
- }
+  sidebarVisible:boolean = true
+
+
+ constructor() {}
  handleIshowEvent() {
   this.ishow = !this.ishow
 }
+handleIsHidden () :void {
+  this.sidebarVisible = !this.sidebarVisible
+  console.log(this.sidebarVisible)
+}
   ngOnDestroy(): void {
   }
+
 }

@@ -1,0 +1,37 @@
+<div class="w-full flex p-0">
+    <span class=" col-4 p-float-label">
+        <p-dropdown styleClass="w-full h-[35px] align-item:center flex" dropdownIcon="false" [options]="day"
+            [(ngModel)]="selectDay" placeholder="Select a City" optionLabel="ngay" optionValue="value "
+            inputId="float-label"></p-dropdown>
+        <label class="w-full" for="float-label">ngày</label>
+    </span>
+    <span class="col-4 p-float-label">
+        <p-dropdown styleClass="w-full h-[35px] align-item:center flex" dropdownIcon="false" [options]="day"
+            [(ngModel)]="selectDay" placeholder="Select a City" optionLabel="ngay" optionValue="value"
+            inputId="float-label"></p-dropdown>
+        <label class="w-full" for="float-label">Tháng</label>
+    </span>
+    <span class="col-4 p-float-label">
+        <p-dropdown styleClass="w-full h-[35px] align-item:center flex" dropdownIcon="false" [options]="day"
+            [(ngModel)]="selectDay" placeholder="Select a City" optionLabel="ngay" optionValue="value"
+            inputId="float-label"></p-dropdown>
+        <label class="w-full" for="float-label">Năm</label>
+    </span>
+</div>
+<div class="grid mt-4 gap-4 items-center ">
+    <div class="card flex justify-content-center w-full flex-col gap-2">
+        <label class="text-md font-bold ">Tỉnh</label>
+        <p-autoComplete class="w-full" [(ngModel)]="selectedItem" [suggestions]="suggestions"
+            (completeMethod)="search($event)"></p-autoComplete>
+    </div>
+    <div class="card flex justify-content-center w-full flex-col gap-2">
+        <label class="text-md font-bold ">Quận/Huyện</label>
+        <p-autoComplete class="w-full" [(ngModel)]="selectedItem" [suggestions]="suggestions"
+            (completeMethod)="search($event)"></p-autoComplete>
+    </div>
+    <div class="card flex justify-center w-full flex-col  gap-2">
+        <label class="text-md font-bold ">Xã/Phường</label>
+        <p-autoComplete class="w-full" [(ngModel)]="selectedItem" [suggestions]="suggestions"
+            (completeMethod)="search($event)"></p-autoComplete>
+    </div>
+</div>

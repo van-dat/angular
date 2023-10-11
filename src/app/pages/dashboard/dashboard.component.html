@@ -1,13 +1,23 @@
-<div class="flex flex-column md:flex-row  gap-4 ">
-    <div class="col-6 p-0">
-        <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+<div class="flex flex-column w-full">
+    <div class="col-12 flex  p-0">
+        <div class="col-4 px-2">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
+        <div class="col-4 px-2">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
+        <div class="col-4 px-2">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
     </div>
-    <div class="col-6 p-0">
+    <div class="col-12 p-0 pt">
         <div class="card flex justify-content-center items-center gap-4 border-2">
             <span class="font-semibold text-xl">Biểu đồ</span>
             <p-dropdown [options]="cities" [(ngModel)]="selectedChart" optionValue="value"
                 optionLabel="chart" (ngModelChange)="getValue(selectedChart)"></p-dropdown>
         </div>
-        <h3>Value binded to <i>{{selectedChart}} </i> property of the Car</h3>
+    </div>
+    <div class="col-4 px-2">
+        <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
     </div>
 </div>

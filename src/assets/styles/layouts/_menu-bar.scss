@@ -1,3 +1,11 @@
 .p-breadcrumb {
     border: none;
 }
+button.p-button {
+    color: #333;
+    border: none;
+}
+
+button.p-button:enabled:hover {
+    background-color: white;
+}

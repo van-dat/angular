@@ -9,9 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-
-
-
+import { FormsModule } from '@angular/forms';
+import { FiltersModule } from '../components/filters/filters.module';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,10 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     RouterModule,
     ButtonModule,
     SidebarModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    FormsModule,
+    FiltersModule,
   ],
   exports: [LayoutsComponent],
 })
-export class LayoutsModule { }
+export class LayoutsModule {}

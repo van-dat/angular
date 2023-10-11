@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs';
@@ -10,6 +10,10 @@ import { filter } from 'rxjs';
   templateUrl: './menu-bar.component.html',
 })
 export class MenuBarComponent implements OnInit {
+@Output() sidebarVisibleShow = new  EventEmitter<void>()
+
+
+
   static readonly ROUTE_BREADCRUMB = 'breadcrumb';
   readonly home = {icon: 'pi pi-home', routerLink: '/'};
   menuItems: MenuItem[]|undefined;
@@ -20,6 +24,9 @@ export class MenuBarComponent implements OnInit {
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => this.menuItems = this.createBreadcrumbs(this.activatedRoute.root));
     
+  }
+  ishow():void {
+    this.sidebarVisibleShow.emit()
   }
   createBreadcrumbs(route: ActivatedRoute, url: string = '#', breadcrumbs: MenuItem[] = []): any {
     const children: ActivatedRoute[] = route.children;
