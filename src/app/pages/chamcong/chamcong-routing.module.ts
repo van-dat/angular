@@ -5,6 +5,9 @@ import { ChamcongComponent } from './chamcong.component';
 const routes: Routes = [
   {
     path: '',
+    data: {
+      breadcrumb: 'Chấm công'
+    },
     component: ChamcongComponent
   }
 ];

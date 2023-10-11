@@ -1,0 +1,32 @@
+<div class="card">
+  <p-table [value]="userDate" styleClass="gridlines" [tableStyle]="{ 'max-width': '100%' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id" style="width: 8%">
+          STT <p-sortIcon field="STT"></p-sortIcon>
+        </th>   
+        <th pSortableColumn="Name" style="width: 23%">
+          Name <p-sortIcon field="Name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="MNV" style="width: 23%">
+          Mã nhân viên <p-sortIcon field="Mã nhân viên"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Dia_chi" style="width: 23%">
+          Địa chỉ <p-sortIcon field="Địa chỉ"></p-sortIcon>
+        </th>
+        <th pSortableColumn="Ngay_sinh" style="width: 23%">
+          Ngày sinh <p-sortIcon field="Ngày sinh"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td style="text-align: center">{{ user.id }}</td>
+        <td style="text-align: center">{{ user.Name }}</td>
+        <td style="text-align: center">{{ user.MNV }}</td>
+        <td style="text-align: center">{{ user.Dia_chi }}</td>
+        <td style="text-align: center">{{ user.Ngay_sinh }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

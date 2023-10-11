@@ -7,7 +7,8 @@ import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 
@@ -18,12 +19,14 @@ import { SidebarModule } from 'primeng/sidebar';
     FooterComponent,
     LayoutsComponent,
     SidebarComponent,
+    MenuBarComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     ButtonModule,
     SidebarModule,
+    BreadcrumbModule
   ],
   exports: [LayoutsComponent],
 })

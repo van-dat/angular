@@ -1,4 +1,4 @@
-<div  class="flex  p-4 flex-col   ">
+<div  class="flex p-4 flex-col bg-white">
     <ul  class="flex flex-col gap-2">
         <li *ngFor="let item of model" class="flex flex-col font-light text-md  text-[#333]  ">
             <div class="flex gap-2 flex-col">
@@ -7,7 +7,7 @@
                 </span>
                 <div class=" w-full flex px-3 items-center" *ngFor="let item of item.items">
                     <button pButton  [routerLink]="item.path" icon="{{item.icon}}" label="{{item.text}}" 
-                        class="  w-full flex gap-2 items-center py-1 rounded-lg px-2 focus:outline-none focus:ring focus:border-blue-500 focus:font-semibold focus:text-[#6366F1] ">
+                        class="bg-white text-[#000] border-none  w-full flex gap-2 items-center py-1 rounded-lg px-2 ">
                     </button>
                 </div>
             </div>

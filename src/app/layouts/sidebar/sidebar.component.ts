@@ -49,9 +49,9 @@ export class SidebarComponent implements OnInit {
         lable: 'Phân tích',
         items: [
           {
-            text: 'Biểu đồ Pie',
+            text: 'Biểu đồ ',
             icon: 'pi pi-chart-pie',
-            path: ['pie']
+            path: ['analyst']
           },
           {
             text: 'Biểu đồ Line',
@@ -60,6 +60,28 @@ export class SidebarComponent implements OnInit {
           },
         ]
       },
+      {
+        lable: 'Hệ thống',
+        items: [
+          {
+            text: 'Cài đặt',
+            icon: 'pi pi-cog',
+            path:['system']
+          }
+        ]
+      },
+      {
+        lable: '',
+        items: [
+          {
+            text: 'Đăng xuất',
+            icon: 'pi pi-cog',
+            path: ['logout']
+          }
+        ]
+      },
+      // 
+
       {
         lable: 'Hệ thống',
         items: [

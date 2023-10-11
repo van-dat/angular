@@ -1,44 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, Output, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { DataService } from 'src/app/services/data.service';
+
 
 @Component({
   selector: 'app-pie',
   templateUrl: './pie.component.html',
 })
-export class PieComponent  {
-  updateFlag = false;
-  nameChart: any = 'Số lượng khách';
-  dataChart: any = [];
-  dataChart2: any = [];
-  dataChart1: any = [];
+export class PieComponent implements OnChanges {
+  @Input() chart_name: string = '';
+  @Input() data: any = [];
+  @Input() typeChart: any = '';
+  updateFlag: boolean = false;
 
+  constructor() { }
 
-  Highcharts: typeof Highcharts = Highcharts;
-
-  constructor(private dataSrv: DataService) {
-    this.dataSrv.getDataPie().subscribe((res) => {
-      this.dataChart = res.data.find((i: any) => i.activity === 17);
-      this.dataChart2 = res.data.find((i: any) => i.activity === 63);
-      this.dataChart1 = res.data.find((i: any) => i.activity === 20);
-      this.handleUpdate();
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['typeChart']) {
+      const type = this.typeChart
+      this.handleUpdate(type)
+    }
   }
+  Highcharts: typeof Highcharts = Highcharts;
   Options_Pie: Highcharts.Options = {
     chart: {
-      type: 'pie',
-      backgroundColor: '#ddd'
+      backgroundColor: 'white',
     },
-    title: {
-      text: 'chart-Pie',
-    },
+
     legend: {
       layout: 'horizontal',
       align: 'center',
       verticalAlign: 'bottom',
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     tooltip: {
       pointFormat: '{series.name}<br/> <b>{point.percentage:.1f}%',
@@ -56,47 +50,22 @@ export class PieComponent  {
         innerSize: 50,
       },
     },
-    series: [
-      {
-        type: 'pie',
-        data: [
-          {
-            y: this.dataChart.activity,
-          },
-          {
-            y: this.dataChart1.activity,
-          },
-          {
-            y: this.dataChart2.activity,
-          },
-        ],
-      },
-    ],
   };
 
-  handleUpdate() {
+  handleUpdate(type: any): void {
+    const pieData = this.data.map((item: any) => ({
+      name: item.name,
+      y: item.activity,
+    }));
+    this.Options_Pie.title = {
+      text: this.chart_name
+    }
     this.Options_Pie.series = [
       {
-        type: 'pie',
-        data: [
-          {
-            color: 'red',
-            name: this.dataChart.name,
-            y: this.dataChart.activity,
-          },
-          {
-            name: this.dataChart1.name,
-            y: this.dataChart1.activity,
-          },
-          {
-            name: this.dataChart2.name,
-            y: this.dataChart2.activity,
-          },
-        ],
+        type: type.toString(),
+        data: pieData,
       },
     ];
-
     this.updateFlag = true;
   }
-  ngOnDestroy(): void { }
 }

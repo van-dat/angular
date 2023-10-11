@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     LayoutsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy},

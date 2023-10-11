@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutsComponent } from './layouts/layouts.component';
-import { DashboardModule } from './components/dashboard/dashboard.module';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
 
 
 const routes: Routes = [
@@ -10,22 +10,28 @@ const routes: Routes = [
     component: LayoutsComponent,
     children: [
       {path:'',
-    loadChildren: ()=> import('./components/dashboard/dashboard.module').then(m=>DashboardModule)},
+    loadChildren: ()=> import('./pages/dashboard/dashboard.module').then(m=>DashboardModule)},
       {
-        path: 'tk', loadChildren: () => import('./components/tk/tk.module').then(m=> m.TkModule)
+        path: 'tk', loadChildren: () => import('./pages/tk/tk.module').then(m=> m.TkModule),
+        data: {}
       }, 
       {
-        path: 'ct', loadChildren: () => import('./components/chamcong/chamcong.module').then(m => m.ChamcongModule)
+        path: 'ct', loadChildren: () => import('./pages/chamcong/chamcong.module').then(m => m.ChamcongModule)
       }
-      , {
-        path: 'pie',
-        loadChildren: () => import('./components/pie/pie.module').then(m=> m.PieModule)
-      },
+      // , {
+      //   path: 'pie',
+      //   loadChildren: () => import('./components/pie/pie.module').then(m=> m.PieModule)
+      // },
+      ,
       {
         path: 'line',
         loadChildren: () => import('./components/line/line.module').then(m=> m.LineModule)
       }
-      
+      // ,
+      // {
+      //   path: 'analyst',
+      //   loadChildren: () => import('./pages/analyst/analyst.module').then(m=> m.AnalystModule)
+      // }
     ]
   }
 ]

@@ -26,7 +26,7 @@ export class LineComponent {
   }
   Options_chart: Highcharts.Options = {
     chart: {
-      backgroundColor: '#ddd',
+      backgroundColor: 'white',
     },
     title: {
       text: 'Line - Chart',
@@ -38,12 +38,12 @@ export class LineComponent {
     },
     yAxis: {
       title: {
-        text: 'Number of Employees',
+        text: '',
       },
     },
     xAxis: {
       // space in column
-      tickInterval: 1,
+      tickInterval: 5,
       // description
       accessibility: {
         rangeDescription: 'Range: 2000 to 2010',
