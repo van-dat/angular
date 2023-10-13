@@ -1,13 +1,19 @@
-.p-dropdown-trigger {
-    display: none;
+span.p-autocomplete {
+    width: 100%;
 }
 
-div.p-sidebar-top{
-    height: 50% !important;
-}
-input.p-element .p-autocomplete-input .p-inputtext .p-component .ng-star-inserted {
+span.p-component {
     width: 100%;
 }
-span.p-component{
+
+.ui-autocomplete input {
     width: 100%;
+}
+
+.p-dropdown-trigger p-dropdown-item {
+    justify-content: center;
+}
+.p-dropdown-items-wrapper {
+    width: 100%;
+    text-align: center;
 }

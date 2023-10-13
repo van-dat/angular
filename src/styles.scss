@@ -13,18 +13,32 @@
 @tailwind utilities;
 
 ::-webkit-scrollbar {
-    width: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #ddd;
-    border: 2px solid transparent;
-    border-radius: 100rem;
-    height: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-    height: 16px;
-  
-  }
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border: 2px solid transparent;
+  border-radius: 100rem;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  height: 16px;
+
+}
+
+.p-dropdown .p-dropdown-trigger {
+  display: none;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  text-align: center;
+}
+.p-dropdown .p-dropdown-label {
+  text-align: center;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.25rem 0.35rem;
+}

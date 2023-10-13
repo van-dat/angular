@@ -1,23 +1,36 @@
-<div class="flex flex-column w-full">
+<div class="flex flex-column  mb-[400px]">
     <div class="col-12 flex  p-0">
         <div class="col-4 px-2">
-            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
         </div>
         <div class="col-4 px-2">
-            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
         </div>
         <div class="col-4 px-2">
-            <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
         </div>
     </div>
     <div class="col-12 p-0 pt">
-        <div class="card flex justify-content-center items-center gap-4 border-2">
+        <div class="card flex justify-content-center items-center gap-4 ">
             <span class="font-semibold text-xl">Biểu đồ</span>
-            <p-dropdown [options]="cities" [(ngModel)]="selectedChart" optionValue="value"
-                optionLabel="chart" (ngModelChange)="getValue(selectedChart)"></p-dropdown>
+            <p-dropdown [options]="cities" [(ngModel)]="selectedChart" optionValue="value" optionLabel="chart"
+                (ngModelChange)="getValue(selectedChart)"></p-dropdown>
         </div>
     </div>
-    <div class="col-4 px-2">
-        <app-pie *ngIf="!!data" [typeChart]="selectedChart"  [chart_name]="myChartName" [data]="dataChart"></app-pie>
+    <div class="col-12 flex mb-10">
+        <div class="col-4 px-2 ">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
+        <div class="col-8 px-2 ">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
+    </div>
+    <div class="col-12 flex">
+        <div class="col-6 px-2 ">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
+        <div class="col-6 px-2 ">
+            <app-pie *ngIf="!!data" [typeChart]="selectedChart" [chart_name]="myChartName" [data]="dataChart"></app-pie>
+        </div>
     </div>
 </div>

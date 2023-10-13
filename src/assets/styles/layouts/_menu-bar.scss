@@ -1,11 +1,14 @@
 .p-breadcrumb {
     border: none;
 }
+.btn-menubar.p-button {
+    color: #333;
+    border: none;
+}
 button.p-button {
     color: #333;
     border: none;
 }
-
 button.p-button:enabled:hover {
     background-color: white;
 }

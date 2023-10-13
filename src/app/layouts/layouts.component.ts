@@ -32,7 +32,6 @@ export class LayoutsComponent implements OnDestroy {
 }
 handleIsHidden () :void {
   this.sidebarVisible = !this.sidebarVisible
-  console.log(this.sidebarVisible)
 }
   ngOnDestroy(): void {
   }
