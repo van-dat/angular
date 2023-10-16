@@ -19,6 +19,8 @@ export class FiltersComponent implements OnInit {
 
   allData: any;
   dataQuan: any;
+  check: any;
+  checkQuan: any
   constructor(private region: RegisonService) { }
 
 
@@ -42,7 +44,9 @@ export class FiltersComponent implements OnInit {
   }
 
   onChangeMonth(event: any) {
+    this.day = []
     const day = event === 4 || event === 6 || event === 11 || event === 9 ? 30 : event === 2 ? 28 : 31
+
     for (let i = 1; i <= day; i++) {
       this.day.push({ ngay: i, value: i });
     }
@@ -58,53 +62,44 @@ export class FiltersComponent implements OnInit {
   suggestionsQuan: any;
 
   tinh(event: any) {
-
-    // if(!event.query) {
-    //   this.suggestionsTinh = this.allData
-    // }else {
-    //   const key = event.query.toLowerCase();
-    //   this.suggestionsTinh = this.allData.filter((item: any) =>
-    //     item.name.toLowerCase().includes(key)
-    //   );
-    // }
-    // this.selectedQuan = ''
-    // this.selectedXa = ''
-    // this.selectedQuan = []
-    this.region.getData(event.query).subscribe((res) => {
+    this.selectedTinh = event.query;
+    this.region.getData(this.selectedTinh).subscribe((res) => {
       this.suggestionsTinh = res.map((i: any) => i.name);
-      this.selectedQuan = ''
-      this.selectedXa = ''
     });
   }
 
   quan(event: any) {
-    console.log(this.selectedTinh)
-    this.dataQuan = this.allData?.find((i:any)=> i.name === this.selectedTinh)?.districts
+    this.dataQuan = this.allData?.find((i: any) => i.name === this.selectedTinh)?.districts
     if (!event.query) {
       this.suggestionsQuan = this.dataQuan
-      console.log('d',this.dataQuan)
-      console.log('a')
     } else {
-      console.log('c')
       const key = event.query.toLowerCase();
-      this.suggestionsQuan = this.dataQuan.filter((item: any) =>
+      this.suggestionsQuan = this.dataQuan?.filter((item: any) =>
         item.name.toLowerCase().includes(key)
       );
     }
-   
+    this.check = this.selectedTinh
   }
   xa(event: any) {
     if (!event.query) {
       this.suggestionsXa = this.selectedQuan?.wards
     } else {
       const key = event.query.toLowerCase();
-      this.suggestionsXa = this.selectedQuan.wards.filter((item: any) =>
+      this.suggestionsXa = this.selectedQuan.wards?.filter((item: any) =>
         item.name.toLowerCase().includes(key)
       );
     }
+    this.checkQuan = this.selectedQuan
   }
- 
 
-  // select date
+  selectTinh() {
+    if (this.check !== this.selectedTinh) {
+      this.selectedQuan = '';
+      this.selectedXa = '';
+    }
+  }
+  selectQuan() {
+    if (this.checkQuan !== this.selectQuan) this.selectedXa = '';
+  }
 
 }

@@ -20,19 +20,19 @@
 <div class="grid mt-4 gap-4">
     <div class="card flex justify-content-center flex-col gap-2">
         <label class="text-md font-bold">Tỉnh:</label>
-        <p-autoComplete [showClear] = "true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [completeOnFocus]="true"
+        <p-autoComplete [required]="true" (onSelect)="selectTinh()" [showClear] = "true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [completeOnFocus]="true"
             [(ngModel)]="selectedTinh" [suggestions]="suggestionsTinh" (completeMethod)="tinh($event)"></p-autoComplete>
     </div>
     <div class="card flex justify-content-center flex-col gap-2">
         <label class="text-md font-bold">Quận/Huyện:</label>
-        <p-autoComplete field="name" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" panelStyleClass="w-full"
+        <p-autoComplete (onSelect)="selectQuan()" field="name" [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" panelStyleClass="w-full"
             [completeOnFocus]="true" [(ngModel)]="selectedQuan" [suggestions]="suggestionsQuan"
             (completeMethod)="quan($event)">
         </p-autoComplete>
     </div>
     <div class="card flex justify-center flex-col gap-2">
         <label class="text-md font-bold">Xã/Phường:</label>
-        <p-autoComplete [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" field="name"
+        <p-autoComplete [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" field="name"
             [completeOnFocus]="true" [(ngModel)]="selectedXa" [suggestions]="suggestionsXa"
             (completeMethod)="xa($event)">
         </p-autoComplete>
