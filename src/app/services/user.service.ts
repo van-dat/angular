@@ -14,11 +14,9 @@ export class UserService {
     return this.http.get<any>(`${this.api}/getall`)
   }
   // 
-  
-  headers: any
-
-
-
+  getUserPage(page:number) :Observable<any> {
+    return this.http.get<any>(`${this.api}/getall?page=${page}`)
+  }
   getUserKey  (key:string) :Observable<any> {
     return this.http.get<any>(`${this.api}/getname${key}`)
   }
@@ -26,6 +24,7 @@ export class UserService {
     return this.http.get<any>(`${this.api}/${id}`);
   }
   PostUser(userData: any): Observable<any> {
+    console.log(userData)
     return this.http.post<any>(this.api, userData);
   }
   updateUser(id:number, data:any) : Observable<any> {
@@ -57,7 +56,5 @@ export class UserService {
     const formattedDate = `${year}${month}${day}`;
     return formattedDate;
   }
-  
- 
 }
 

@@ -6,6 +6,7 @@ import { TkRouteModule } from './tk-routing.module';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     TkComponent
@@ -16,7 +17,8 @@ import { ButtonModule } from 'primeng/button';
     TkRouteModule,
     TableModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule
   ]
 })
 export class TkModule { }

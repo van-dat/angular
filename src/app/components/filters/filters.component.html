@@ -21,13 +21,13 @@
     <div class="card flex justify-content-center flex-col gap-1">
         <label class="text-md ">Tỉnh</label>
         <p-autoComplete [required]="true" (onSelect)="selectTinh()" [showClear] = "true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [completeOnFocus]="true"
-            [(ngModel)]="selectedTinh" [suggestions]="suggestionsTinh" (completeMethod)="tinh($event)" [placeholder]="placeholderTinh" ></p-autoComplete>
+            [(ngModel)]="selectedTinh" [suggestions]="suggestionsTinh" (completeMethod)="tinh($event)" [placeholder]="placeholderTinh? placeholderTinh:'--Tỉnh--'" ></p-autoComplete>
     </div>
     <div class="card flex justify-content-center flex-col gap-1">
         <label class="text-md ">Quận/Huyện</label>
         <p-autoComplete (onSelect)="selectQuan()" field="name" [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" panelStyleClass="w-full"
             [completeOnFocus]="true" [(ngModel)]="selectedQuan" [suggestions]="suggestionsQuan"
-            (completeMethod)="quan($event)" [placeholder]="placeholderHuyen" >
+            (completeMethod)="quan($event)" [placeholder]="placeholderHuyen? placeholderHuyen :'--Quận/Huyện--'" >
         </p-autoComplete>
     </div>
     <div class="card flex justify-center flex-col gap-1">
@@ -35,7 +35,7 @@
         <p-autoComplete [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" field="name"
             [completeOnFocus]="true" [(ngModel)]="selectedXa" [suggestions]="suggestionsXa"
             (completeMethod)="xa($event)"
-            (onSelect)="selectXa()" [placeholder]="placeholderXa">
+            (onSelect)="selectXa()" [placeholder]="placeholderXa? placeholderXa: '--Xã/Phường--'">
         </p-autoComplete>
     </div>
 </div>

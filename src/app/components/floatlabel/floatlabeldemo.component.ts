@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
+
 interface Gender {
     type: number;
     value: string;
@@ -19,6 +20,7 @@ export class FloatLabelDemoComponent implements OnInit {
     @Input() dataOneUser!: any;
     @Input() param!: any
     @Input() isRePair!: boolean
+    @Input() isCreate!:boolean
 
     constructor(
         private UserSvr: UserService,
@@ -36,16 +38,7 @@ export class FloatLabelDemoComponent implements OnInit {
     address: string = '';
     isDelete: boolean = true
 
-    GenderUser: Gender[] = [
-        {
-            type: 0,
-            value: 'Nam',
-        },
-        {
-            type: 1,
-            value: 'Nữ',
-        },
-    ];
+    GenderUser!: any[]
 
     ngOnInit() {
 
@@ -74,12 +67,30 @@ export class FloatLabelDemoComponent implements OnInit {
             Gender: new FormControl({ value: null, disabled: true }, [
                 Validators.required,
             ]),
+            Password: new FormControl({ value: null, disabled: true }, [
+                Validators.required,
+            ]),
+           
+           
         });
+        this.GenderUser = [
+            {
+                type: 0,
+                value: 'Nam',
+            },
+            {
+                type: 1,
+                value: 'Nữ',
+            },
+        ]
         // local
         const local = localStorage.getItem('key');
         if (local) this.dataLocal = JSON.parse(local);
         if (this.dataLocal?.userLocal?.id == this.param?.id) {
             this.isDelete = false
+        }
+        if(this.isCreate) {
+            this.user.enable()
         }
 
     }
@@ -117,7 +128,6 @@ export class FloatLabelDemoComponent implements OnInit {
             UserTypeId: userValue.Position,
             PositionTypeId: userValue.Division,
         };
-        console.log(update)
         this.UserSvr.updateUser(this.dataOneUser[0]?.id, update).subscribe(
             (res) => {
                 const result = { content: 'Cập Nhật thành công', severity: 'success' };
@@ -150,10 +160,50 @@ export class FloatLabelDemoComponent implements OnInit {
             severity: e.severity,
         });
     }
+    // create
+    handleCreate() {
+        const create = this.user.value
+        const date = new Date().toLocaleDateString("fr-CA", {year:"numeric", month: "2-digit", day:"2-digit"})
+        const isEmpty = Object.values(create).some(value => !value);
+        const address = this.address === '' ? null : this.address;
+        if (isEmpty && !address) {
+            const result = { content: 'Không thể thêm tài khoản ! vui lòng điền đủ thông tin', severity: 'warn' };
+            this.showError(result);
+            return;
+        }
+        const data = {
+            Name: create.Name,
+            Birdthday: this.UserSvr.formatDateString(create.Birthday) == "19700101" ? null : this.UserSvr.formatDateString(create.Birthday),
+            Email: create.Email,
+            Password: create.Password,
+            Address: address,
+            Phone: create.Phone,
+            Gender: create.Gender?.type || 0,
+            UserTypeId: create.Position,
+            PositionTypeId: create.Division,
+            IdUser: 0,
+            CreateBy: this.dataLocal?.userLocal?.id,
+            createDay:this.UserSvr.formatDateString(date)
+        };
+        this.UserSvr.PostUser(data).subscribe((res)=> {
+           
+        },
+        (error)=> {
+            console.log(error)
+            if(error.status == 500) {
+                const result = { content: 'Không thể thêm tài khoản ', severity: 'warn' };
+                this.showError(result);
+                return;
+            }
+        })
+        const result = { content: 'Tạo tài khoản thành công', severity: 'success' };
+        this.showError(result);
+       
+    }
 
     confirm1() {
         this.confirmationService.confirm({
-            message: 'Are you sure that you want to proceed?',
+            message: `Are you sure that you want to delete User : ${this.dataOneUser[0].Name}?`,
             accept: () => {
                 this.UserSvr.deletedUser(this.dataOneUser[0]?.id).subscribe()
                 const result = { content: 'Xóa thành công thành công', severity: 'success' };

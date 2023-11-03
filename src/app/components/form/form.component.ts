@@ -1,60 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PositionService } from 'src/app/services/position.service';
+import { UserTypeService } from 'src/app/services/user-type.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
 })
 export class FormComponent implements OnInit {
+    dataOneUser!:any
+    division!: any[]
+    position!: any[];
+    isCreate:boolean = true
+   
 
-    countries: any[] = [];
-
-
-
-    filteredCountries: any[] = [];
-
-    value1: any;
-
-    value2: any;
-
-    value3: any;
-
-    value4: any;
-
-    value5: any;
-
-    value6: any;
-
-    value7: any;
-
-    value8: any;
-
-    value9: any;
-
-    value10: any;
-
-    value11: any;
-
-    value12: any;
-
-
-
+constructor(private positionSvr: PositionService, private useTypeSrv: UserTypeService, private route : ActivatedRoute, private UserSvr : UserService) {}
     ngOnInit() {
-
+        this.positionSvr.getPosition().subscribe(res => {
+            this.division = res
+          })
+          this.useTypeSrv?.getUserType().subscribe(res => {
+            this.position = res
+          })
     }
 
-    searchCountry(event: any) {
-        // in a real application, make a request to a remote url with the query and
-        // return filtered results, for demo we filter at client side
-        const filtered: any[] = [];
-        const query = event.query;
-        // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < this.countries.length; i++) {
-            const country = this.countries[i];
-            if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                filtered.push(country);
-            }
-        }
-
-        this.filteredCountries = filtered;
-    }
 }

@@ -13,6 +13,7 @@ export class AccountComponent  implements OnInit{
   @Input() position!: any[];
   user!: any
   address!: any
+  dataOneUser!: any
 
 
   GenderUser: any[] = [

@@ -1,17 +1,9 @@
 <div class="card pb-[200px]">
 
-  <p-table [columns]="label" #dt1 
-  [value]="userData" 
-  [globalFilterFields]="label.field" 
-  styleClass="gridlines"
-  [paginator]="true"
-  [rows]="5"
-  [rowsPerPageOptions]="[5, 10, 15]"
-  [showCurrentPageReport]="true"
-  selectionMode="single"
-  [(selection)]="selectedUser"
-  (onRowSelect)="onRowSelect($event)" 
-    [tableStyle]="{ 'max-width': '100%' }">
+  <p-table [columns]="label" #dt1 [value]="userData" [globalFilterFields]="label.field" styleClass=""
+    [paginator]="true" [rows]="2" (onPage)="onPageValue($event)" [rowsPerPageOptions]="rowsPerPageOptions"
+    [showCurrentPageReport]="true" selectionMode="single" [(selection)]="selectedUser"
+    (onRowSelect)="onRowSelect($event)" [tableStyle]="{ 'max-width': '100%' }">
     <ng-template pTemplate="caption">
       <div class="flex">
         <div class="p-input-icon-left ml-auto h-8 flex items-center">
@@ -24,17 +16,32 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <td *ngFor="let item of label" pSortableColumn="{{item.link}}">
+        <th *ngFor="let item of label" pSortableColumn="{{item.link}} " class="text-center">
           {{item.name}} <p-sortIcon *ngIf="item.link" field="STT"></p-sortIcon>
-        </td>
+        </th>
+        <th></th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-user let-columns="columns">
-      <tr  [pSelectableRow]="user">
-        <td class="text-center" *ngFor="let col of columns">
+      <tr [pSelectableRow]="user" class="text-center">
+        <td class="text-center p-0" *ngFor="let col of columns">
           {{ user[col.field] }}
+        </td>
+        <td >
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+            (click)="editProduct(user)"></button>
+        </td>
+        <td class="pl-0">
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="deleteProduct(user)"></button>
         </td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="paginatorleft" class="flex justify-center items-center">
+
+    </ng-template>
+
   </p-table>
+
 </div>
