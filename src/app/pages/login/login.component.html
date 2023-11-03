@@ -1,0 +1,40 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div
+            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
+                    <span class="text-600 font-medium">Sign in to continue</span>
+                </div>
+
+                <form [formGroup]="dataLogin" (submit)="onSubmitLogin()">
+                    <label for="email1" class=" flex-1 block text-900 text-xl font-medium mb-2">Email</label>
+                    <input id="email1" formControlName="email" type="text" placeholder="Email address" pInputText
+                        class="w-full md:w-30rem flex-1" style="padding:1rem">
+                    <div class="mb-4">
+                        <small *ngIf="checkEmail" id="username-help" class="p-error">Enter your email.</small>
+                    </div>
+                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                    <p-password [feedback]="false" id="password1" formControlName="password" placeholder="Password" [toggleMask]="true"
+                         inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                    <div class="mb-4">
+                        <small *ngIf="checkPass" id="username-help" class="p-error">Enter your password.</small>
+                    </div>
+                    <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                        <div class="flex align-items-center">
+                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
+                            <label for="rememberme1">Remember me</label>
+                        </div>
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                            style="color: var(--primary-color)">Forgot password?</a>
+                            <p-toast></p-toast>
+                    </div>
+                    
+                    <button pButton pRipple type="submit" label="Login"
+                        class="page w-full p-3 text-center text-xl flex items-center bg-blue-600 hover:bg-blue-400"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TkComponent } from './tk.component';
+import { ThongtinComponent } from './thongtin.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TkComponent
+    data: {
+      breadcrumb: 'Thông tin'
+    },
+    component: ThongtinComponent
   }
 ];
 
@@ -14,4 +17,4 @@ const routes: Routes = [
   exports: [RouterModule],
 
 })
-export class TkRouteModule { }
+export class ThongtinRouteModule { }

@@ -1,5 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-layouts',
@@ -21,19 +22,20 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class LayoutsComponent implements OnDestroy {
+export class LayoutsComponent implements OnInit {
   ishow:boolean = true
-  sidebarVisible:boolean = true
+  sidebarVisible:boolean = false
+  id!:any
+  
 
 
- constructor() {}
+ constructor(private parameter :ActivatedRoute) {}
  handleIshowEvent() {
   this.ishow = !this.ishow
 }
 handleIsHidden () :void {
   this.sidebarVisible = !this.sidebarVisible
 }
-  ngOnDestroy(): void {
+  ngOnInit(): void {
   }
-
 }

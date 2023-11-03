@@ -27,8 +27,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js"
+              
             ]
           },
           "configurations": {

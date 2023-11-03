@@ -29,16 +29,67 @@
 
 }
 
-.p-dropdown .p-dropdown-trigger {
+.filter .p-dropdown .p-dropdown-trigger {
   display: none;
 }
 
 .p-dropdown .p-dropdown-label.p-placeholder {
   text-align: center;
 }
+
 .p-dropdown .p-dropdown-label {
   text-align: center;
 }
+
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
   padding: 0.25rem 0.35rem;
 }
+
+.p-button:enabled:hover {
+  background-color: blue;
+  color: #333;
+
+}
+
+.p-element.p-breadcrumb {
+  border: none;
+}
+
+.page .p-button-label {
+  width: 100%;
+  color: #333;
+}
+
+.p-paginator .p-dropdown .p-dropdown-label {
+  width: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  text-align: center;
+}
+.calender .p-element {
+  border: 1px solid #ced4da;  
+ 
+}
+.calender .p-element:first-child {
+  border: none;
+}
+.calender .p-datepicker table td > span {
+  width: 22px;
+  height: 21px;
+}
+
+@media only screen and (max-width: 768px) {
+  .p-button-label {
+    display: none;
+  }
+  .p-button-icon {
+    font-size: 24px;
+  }
+  .card .formUser {
+    flex-direction: column;
+  }
+ }

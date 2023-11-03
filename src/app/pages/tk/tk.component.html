@@ -1,31 +1,39 @@
-<div class="card">
-  <p-table [value]="userDate" styleClass="gridlines" [tableStyle]="{ 'max-width': '100%' }">
+<div class="card pb-[200px]">
+
+  <p-table [columns]="label" #dt1 
+  [value]="userData" 
+  [globalFilterFields]="label.field" 
+  styleClass="gridlines"
+  [paginator]="true"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 15]"
+  [showCurrentPageReport]="true"
+  selectionMode="single"
+  [(selection)]="selectedUser"
+  (onRowSelect)="onRowSelect($event)" 
+    [tableStyle]="{ 'max-width': '100%' }">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <div class="p-input-icon-left ml-auto h-8 flex items-center">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt1.filterGlobal(getValue($event), 'contains')"
+            placeholder="Search keyword"
+            class=" text-md rounded-md font-normal h-full pl-5 pr-2 focus:outline-none focus:border-sky-500 focus:ring-1" />
+        </div>
+      </div>
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="id" style="width: 8%">
-          STT <p-sortIcon field="STT"></p-sortIcon>
-        </th>   
-        <th pSortableColumn="Name" style="width: 23%">
-          Name <p-sortIcon field="Name"></p-sortIcon>
-        </th>
-        <th pSortableColumn="MNV" style="width: 23%">
-          Mã nhân viên <p-sortIcon field="Mã nhân viên"></p-sortIcon>
-        </th>
-        <th pSortableColumn="Dia_chi" style="width: 23%">
-          Địa chỉ <p-sortIcon field="Địa chỉ"></p-sortIcon>
-        </th>
-        <th pSortableColumn="Ngay_sinh" style="width: 23%">
-          Ngày sinh <p-sortIcon field="Ngày sinh"></p-sortIcon>
-        </th>
+        <td *ngFor="let item of label" pSortableColumn="{{item.link}}">
+          {{item.name}} <p-sortIcon *ngIf="item.link" field="STT"></p-sortIcon>
+        </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user>
-      <tr>
-        <td style="text-align: center">{{ user.id }}</td>
-        <td style="text-align: center">{{ user.Name }}</td>
-        <td style="text-align: center">{{ user.MNV }}</td>
-        <td style="text-align: center">{{ user.Dia_chi }}</td>
-        <td style="text-align: center">{{ user.Ngay_sinh }}</td>
+    <ng-template pTemplate="body" let-user let-columns="columns">
+      <tr  [pSelectableRow]="user">
+        <td class="text-center" *ngFor="let col of columns">
+          {{ user[col.field] }}
+        </td>
       </tr>
     </ng-template>
   </p-table>

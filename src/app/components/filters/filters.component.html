@@ -1,4 +1,4 @@
-<div class=" w-full flex justify-between items-center">
+<div *ngIf="false" class=" filter w-full flex justify-between items-center">
     <div class="card col-4 items-center p-0 px-1 ">
         <p-dropdown placeholder="Năm" dropdownIcon="false"   panelStyleClass="w-full text-center" styleClass="w-full h-[30px] flex items-center  "[options]="year" [(ngModel)]="selectYear"
             optionLabel="nam" optionValue="value">
@@ -11,30 +11,31 @@
         </p-dropdown>
     </div>
     <span>/</span>
-    <div class="card  col-4 p-0 px-1 ">
+    <div class="card   col-4 p-0 px-1 ">
         <p-dropdown placeholder="Ngày" dropdownIcon="false"   panelStyleClass="w-full text-center"  styleClass="w-full h-[30px] flex items-center"[options]="day" [(ngModel)]="selectDay"
             optionLabel="ngay" optionValue="value">
         </p-dropdown>
     </div>
 </div>
-<div class="grid mt-4 gap-4">
-    <div class="card flex justify-content-center flex-col gap-2">
-        <label class="text-md font-bold">Tỉnh:</label>
+<div class="flex flex-col">
+    <div class="card flex justify-content-center flex-col gap-1">
+        <label class="text-md ">Tỉnh</label>
         <p-autoComplete [required]="true" (onSelect)="selectTinh()" [showClear] = "true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" [completeOnFocus]="true"
-            [(ngModel)]="selectedTinh" [suggestions]="suggestionsTinh" (completeMethod)="tinh($event)"></p-autoComplete>
+            [(ngModel)]="selectedTinh" [suggestions]="suggestionsTinh" (completeMethod)="tinh($event)" [placeholder]="placeholderTinh" ></p-autoComplete>
     </div>
-    <div class="card flex justify-content-center flex-col gap-2">
-        <label class="text-md font-bold">Quận/Huyện:</label>
+    <div class="card flex justify-content-center flex-col gap-1">
+        <label class="text-md ">Quận/Huyện</label>
         <p-autoComplete (onSelect)="selectQuan()" field="name" [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" panelStyleClass="w-full"
             [completeOnFocus]="true" [(ngModel)]="selectedQuan" [suggestions]="suggestionsQuan"
-            (completeMethod)="quan($event)">
+            (completeMethod)="quan($event)" [placeholder]="placeholderHuyen" >
         </p-autoComplete>
     </div>
-    <div class="card flex justify-center flex-col gap-2">
-        <label class="text-md font-bold">Xã/Phường:</label>
+    <div class="card flex justify-center flex-col gap-1">
+        <label class="text-md ">Xã/Phường</label>
         <p-autoComplete [required]="true" [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }" field="name"
             [completeOnFocus]="true" [(ngModel)]="selectedXa" [suggestions]="suggestionsXa"
-            (completeMethod)="xa($event)">
+            (completeMethod)="xa($event)"
+            (onSelect)="selectXa()" [placeholder]="placeholderXa">
         </p-autoComplete>
     </div>
 </div>

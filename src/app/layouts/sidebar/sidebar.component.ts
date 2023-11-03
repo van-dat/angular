@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit {
+  id!:any
   model: any[] = []
   sidebarVisible: boolean = true
-
-  constructor() {
-
+  dataLocal!:any
+  constructor(private route: Router, private parameter : ActivatedRoute) {
+   
   }
   ngOnInit(): void {
+    const local = localStorage.getItem('key');
+    if (local) this.dataLocal = JSON.parse(local);
     this.model = [
       {
         lable: 'Home',
@@ -27,11 +31,22 @@ export class SidebarComponent implements OnInit {
         lable: 'Tài Khoản',
         items: [
           {
-            text: 'Thông tin',
-            icon: 'pi pi-user',
+            text: 'Tài khoản',
+            icon: 'pi pi-users',
             path: ['tk']
           },
-
+          {
+            text: 'Thông tin tài khoản',
+            icon: 'pi pi-user',
+            path: ['info'],
+            param: this.dataLocal?.userLocal?.id 
+          },
+          {
+            text: 'Tạo tài khoản',
+            icon: 'pi pi-user-plus',
+            path: ['create'],
+           
+          }
         ]
       },
       {
@@ -103,5 +118,10 @@ export class SidebarComponent implements OnInit {
         ]
       }
     ]
+  }
+
+  handleLayout() {
+    const local = localStorage.getItem('key');
+    if (local) this.dataLocal = JSON.parse(local);
   }
 }

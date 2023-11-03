@@ -1,0 +1,81 @@
+<div class="card overflow-y-auto  ">
+    <form [formGroup]="user" class="formUser flex w-full p-fluid  mt-3">
+        <div class=" col-12 md:col-4 flex flex-col items-center gap-4 ">
+            <div class="field flex flex-col col-12 gap-2">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <span class="flex w-full">
+                        <input type="text" inputId="inputgroup" pInputText formControlName="Name" />
+                    </span>
+                </div>
+
+                <div class="col-12 p-0 z-30 ">
+                    <div class=" flex w-full gap-1 ">
+                        <div class="flex flex-col col-7 p-0">
+                            <label htmlFor="calendar">Birthday</label>
+                            <p-calendar dateFormat="yy-mm-dd"
+                                class=" calender rounded-tr-none rounded-br-none border-r-0" formControlName="Birthday"
+                                [showIcon]="true"></p-calendar>
+                        </div>
+                        <div class="flex card flex-col col-5 p-0">
+                            <label htmlFor="Gender">Gender</label>
+                            <p-dropdown [options]="GenderUser" optionLabel="value" optionValue="type" inputId="Gender"
+                                formControlName="Gender"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 md:col-8 flex ">
+            <div class=" col-12  md:col-7">
+                <div class="flex flex-col w-full gap-1">
+                    <label htmlFor="inputgroup">Phone</label>
+                    <input type="text" inputId="inputgroup" pInputText formControlName="Phone" />
+                </div>
+                <div  class="flex flex-col w-full gap-1">
+                    <label htmlFor="inputgroup">Address</label>
+                    <input type="text" inputId="inputgroup" pInputText formControlName="Address" />
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                    <label htmlFor="inputgroup">Email</label>
+                    <input type="email" inputId="inputgroup" pInputText formControlName="Email">
+                </div>
+                <!-- form update -->
+
+                <div class="flex col-12 p-0 w-full gap-1">
+                    <div class="flex col-6 p-0 flex-col  gap-1">
+                        <label htmlFor="dropdown">Position</label>
+                        <p-dropdown class="capitalize" inputId="dropdown" [options]="position"
+                            formControlName="Position" optionValue="id" optionLabel="userTypeName"></p-dropdown>
+                    </div>
+                    <div class="flex col-6 p-0 flex-col gap-1">
+                        <label htmlFor="dropdown">Division</label>
+                        <p-dropdown class="capitalize" inputId="dropdown" optionValue="id" [options]="division"
+                            formControlName="Division" optionLabel="positionName"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+          
+            <div class=" col-12 md:col-5 gap-1">
+
+                <ng-container>
+                    <app-filters
+                        (newItemEvent)="getDataAddress($event)"></app-filters>
+                </ng-container>
+                <div class="card mt-8 flex gap-2  justify-content-center">
+                    <ng-container>
+                        <p-button (click)="handleCreateAcc()" class="rounded-lg bg-blue-600 text-white hover:shadow-lg"
+                            label="Tạo tài khoản"></p-button>
+                    </ng-container>
+                    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+                </div>
+                <p-toast class="p-button-success"
+                    [breakpoints]="{'920px': {width: '100%', right: '0', left: '0',}}"></p-toast>
+            </div>
+        </div>
+    </form>
+    dnjkasbdakdla
+</div>

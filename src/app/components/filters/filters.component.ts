@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, } from '@angular/core';
 import { RegisonService } from 'src/app/services/regison.service';
-
+import { Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -8,6 +8,9 @@ import { RegisonService } from 'src/app/services/regison.service';
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<string>();
+  @Input() Address:any
+  
   selectDay: any;
   day: any[] = [];
   // year
@@ -16,11 +19,15 @@ export class FiltersComponent implements OnInit {
   // month
   month: any[] = []
   selectMonth: any;
+  placeholderTinh!:string
+  placeholderHuyen!:string
+  placeholderXa!:string
 
   allData: any;
   dataQuan: any;
   check: any;
   checkQuan: any
+  address: string = ''
   constructor(private region: RegisonService) { }
 
 
@@ -28,6 +35,11 @@ export class FiltersComponent implements OnInit {
     this.region.getAll().subscribe(res => (this.allData = res))
     this.tooltipDate()
     this.selectYear
+    this.placeholderXa = this.Address?.split('-')[0]
+    this.placeholderHuyen = this.Address?.split('-')[1]
+    this.placeholderTinh = this.Address?.split('-')[2]
+
+    
   }
 
   tooltipDate() {
@@ -66,6 +78,7 @@ export class FiltersComponent implements OnInit {
     this.region.getData(this.selectedTinh).subscribe((res) => {
       this.suggestionsTinh = res.map((i: any) => i.name);
     });
+   
   }
 
   quan(event: any) {
@@ -97,9 +110,15 @@ export class FiltersComponent implements OnInit {
       this.selectedQuan = '';
       this.selectedXa = '';
     }
+    
   }
   selectQuan() {
     if (this.checkQuan !== this.selectQuan) this.selectedXa = '';
+    this.address = this.selectedTinh
+  }
+  selectXa() {
+    this.address =`${this.selectedXa.name}-${this.selectedQuan.name}-${this.selectedTinh}`
+    this.newItemEvent.emit(this.address) 
   }
 
 }

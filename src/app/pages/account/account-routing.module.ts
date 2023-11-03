@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TkComponent } from './tk.component';
+import { AccountComponent } from './account.component';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Tài khoản'
+      breadcrumb: 'Tạo tài khoản'
     },
-    component: TkComponent,
-    
+    component: AccountComponent
   }
 ];
 
@@ -18,4 +17,4 @@ const routes: Routes = [
   exports: [RouterModule],
 
 })
-export class TkRouteModule { }
+export class AccountRouteModule { }
