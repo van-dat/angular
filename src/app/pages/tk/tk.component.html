@@ -1,7 +1,7 @@
 <div class="card pb-[200px]">
 
   <p-table [columns]="label" #dt1 [value]="userData" [globalFilterFields]="label.field" styleClass=""
-    [paginator]="true" [rows]="2" (onPage)="onPageValue($event)" [rowsPerPageOptions]="rowsPerPageOptions"
+    [paginator]="true" [rows]="5" (onPage)="onPageValue($event)" [rowsPerPageOptions]="rowsPerPageOptions"
     [showCurrentPageReport]="true" selectionMode="single" [(selection)]="selectedUser"
     (onRowSelect)="onRowSelect($event)" [tableStyle]="{ 'max-width': '100%' }">
     <ng-template pTemplate="caption">
@@ -43,5 +43,5 @@
     </ng-template>
 
   </p-table>
-
+  <p-confirmDialog class="bg-red-500 " [style]="{width: '50vw'}"></p-confirmDialog>
 </div>

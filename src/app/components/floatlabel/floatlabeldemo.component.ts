@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 interface Gender {
@@ -18,15 +18,15 @@ export class FloatLabelDemoComponent implements OnInit {
     @Input() division!: any[];
     @Input() position!: any[];
     @Input() dataOneUser!: any;
-    @Input() param!: any
     @Input() isRePair!: boolean
-    @Input() isCreate!:boolean
+    @Input() isCreate!: boolean
 
     constructor(
         private UserSvr: UserService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
-        private route : Router
+        private route: Router,
+        private router: ActivatedRoute,
     ) { }
 
     dataLocal!: any;
@@ -34,77 +34,87 @@ export class FloatLabelDemoComponent implements OnInit {
     selectedGender!: any[];
     CreateDay!: any[];
     filteredCountries: any[] = [];
-    user: any;
     address: string = '';
-    isDelete: boolean = true
+    isDelete: boolean = true;
+    data!: any[];
+    param!: any;
 
-    GenderUser!: any[]
+    GenderUser: any[] = [
+        {
+            type: 0,
+            value: 'Nam',
+        },
+        {
+            type: 1,
+            value: 'Nữ',
+        },
+    ];
+
+    user: any = new FormGroup({
+        Name: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Birthday: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Phone: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Address: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Email: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Position: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Division: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Gender: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ]),
+        Password: new FormControl({ value: null, disabled: false }, [
+            Validators.required,
+        ])
+    });
 
     ngOnInit() {
 
-        this.user = new FormGroup({
-            Name: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Birthday: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Phone: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Address: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Email: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Position: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Division: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Gender: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-            Password: new FormControl({ value: null, disabled: true }, [
-                Validators.required,
-            ]),
-           
-           
-        });
-        this.GenderUser = [
-            {
-                type: 0,
-                value: 'Nam',
-            },
-            {
-                type: 1,
-                value: 'Nữ',
-            },
-        ]
+        this.getParam()
+        this.getData()
+        
+
         // local
         const local = localStorage.getItem('key');
         if (local) this.dataLocal = JSON.parse(local);
         if (this.dataLocal?.userLocal?.id == this.param?.id) {
             this.isDelete = false
         }
-        if(this.isCreate) {
-            this.user.enable()
-        }
+
 
     }
 
-    //
-    handleRepair() {
-        this.isRePair = false;
-        this.user.enable();
+    getData() {
+        this.UserSvr.getOneUser(this.param?.id).subscribe(res => {
+            this.user.setValue({
+                Name: res[0].Name,
+                Birthday: this.UserSvr.formatDate(res[0].Birdthday),
+                Phone: res[0].Phone,
+                Address: res[0].Address,
+                Email: res[0].Email,
+                Position: res[0].UserTypeName,
+                Division: res[0].PositionName,
+                Gender: res[0].Gender = 0? "Nam": "Nữ",
+                Password : res[0].Password
+            });
+        })
+        
     }
-    handleCancel() {
-        this.isRePair = true;
-        this.user.disable();
-    }
-    // update
+
+
+
     handleUpdate() {
         const userValue = this.user.value;
         const isEmpty = Object.values(userValue).every(value => !value);
@@ -137,7 +147,7 @@ export class FloatLabelDemoComponent implements OnInit {
             },
             (error) => {
                 if (error.status == 500) {
-                   
+
                     const result = { content: 'Không thể cập nhật', severity: 'warn' };
                     this.showError(result);
                     this.isRePair = true;
@@ -146,11 +156,8 @@ export class FloatLabelDemoComponent implements OnInit {
             }
         );
     }
-    // delete
-    handleDeleted() {
-        this.confirm1()
 
-    }
+
     getDataAddress(address: string) {
         this.address = address;
     }
@@ -163,7 +170,7 @@ export class FloatLabelDemoComponent implements OnInit {
     // create
     handleCreate() {
         const create = this.user.value
-        const date = new Date().toLocaleDateString("fr-CA", {year:"numeric", month: "2-digit", day:"2-digit"})
+        const date = new Date().toLocaleDateString("fr-CA", { year: "numeric", month: "2-digit", day: "2-digit" })
         const isEmpty = Object.values(create).some(value => !value);
         const address = this.address === '' ? null : this.address;
         if (isEmpty && !address) {
@@ -183,23 +190,33 @@ export class FloatLabelDemoComponent implements OnInit {
             PositionTypeId: create.Division,
             IdUser: 0,
             CreateBy: this.dataLocal?.userLocal?.id,
-            createDay:this.UserSvr.formatDateString(date)
+            createDay: this.UserSvr.formatDateString(date)
         };
-        this.UserSvr.PostUser(data).subscribe((res)=> {
-           
+        this.UserSvr.PostUser(data).subscribe((res) => {
+
         },
-        (error)=> {
-            console.log(error)
-            if(error.status == 500) {
-                const result = { content: 'Không thể thêm tài khoản ', severity: 'warn' };
-                this.showError(result);
-                return;
-            }
-        })
+            (error) => {
+                console.log(error)
+                if (error.status == 500) {
+                    const result = { content: 'Không thể thêm tài khoản ', severity: 'warn' };
+                    this.showError(result);
+                    return;
+                }
+            })
         const result = { content: 'Tạo tài khoản thành công', severity: 'success' };
         this.showError(result);
-       
+
     }
+
+    getParam() {
+        this.router.queryParams.subscribe(res => {
+            if (res) {
+                this.param = res
+            }
+            console.log(this.param)
+        })
+    }
+
 
     confirm1() {
         this.confirmationService.confirm({

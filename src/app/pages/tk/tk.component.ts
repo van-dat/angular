@@ -4,12 +4,13 @@ import { Table } from 'primeng/table';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 
+
 @Component({
   selector: 'app-tk',
   templateUrl: './tk.component.html',
+  providers: [MessageService, ConfirmationService],
 })
 export class TkComponent implements OnInit {
-
   @ViewChild('dt1') dt!: Table;
   userData: any = []
   selectedUser: any = []
@@ -60,8 +61,7 @@ export class TkComponent implements OnInit {
     },
 
   ]
-  constructor(private userSrv: UserService, private route: Router, private messageService: MessageService,
-    private confirmationService: ConfirmationService, private UserSvr: UserService) { }
+  constructor(private userSrv: UserService, private route: Router,  private messageService: MessageService, private confirmationService: ConfirmationService,) { }
   ngOnInit(): void {
     this.getdata(this.page)
   }
@@ -104,19 +104,19 @@ export class TkComponent implements OnInit {
     console.log(e.rows)
   }
   editProduct(e: any) {
-    // this.route.navigate(['/home/info'], { queryParams: { id: e?.id } })
-    console.log(e)
+    this.route.navigate(['/home/info'], { queryParams: { id: e?.id } })
   }
   deleteProduct(e: any) {
-    console.log(e)
     this.confirm1(e)
+    console.log(e)
   }
 
+  
   confirm1(e: any) {
     this.confirmationService.confirm({
       message: `Are you sure that you want to delete User : ${e.Name}?`,
       accept: () => {
-        this.UserSvr.deletedUser(e.id).subscribe()
+        this.userSrv.deletedUser(e?.id).subscribe()
         const result = { content: 'Xóa thành công thành công', severity: 'success' };
         this.showError(result);
         this.route.navigate(['/home/tk'])
@@ -124,11 +124,10 @@ export class TkComponent implements OnInit {
 
     });
   }
-
   showError(e: any) {
     this.messageService.add({
-      detail: e.content,
-      severity: e.severity,
+        detail: e.content,
+        severity: e.severity,
     });
-  }
+}
 }
